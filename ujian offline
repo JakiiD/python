@@ -1,0 +1,49 @@
+def main():
+    try:
+        total_pesanan = int(input("Masukkan total pesanan: "))
+        id_pelanggan = int(input("Masukkan id pelanggan: "))
+        nama_pelanggan = input("Masukkan nama pelanggan: ")
+
+        with open("Coffee Shop.txt", "w", encoding="utf-8") as file:
+            width = 87
+
+            file.write(f"{' ' * ((width - len('Coffee Shop')) // 2)}Coffee Shop\n")
+            file.write(f"{' ' * ((width - len('Daily Orders')) // 2)}Daily Orders\n\n")
+
+            for order_num in range(1, total_pesanan + 1):
+                print(f"Pesanan #{order_num:02d}")
+                total_kopi = int(input(f"Masukkan total kopi order ke {order_num} ini: "))
+                total_harga = 0
+
+                file.write(f"Order #{order_num:02d}\n")
+                file.write(f"Monday, 11 November 2024")
+                file.write("=" * 87 + "\n")
+                file.write("QTY\tItem" + " " * (69) + "AMT (Rp)\n")
+                file.write("=" * 87 + "\n")
+
+                for x in range(1, total_kopi + 1):
+                    nama_kopi = input(f"Masukkan Nama Kopi ke-{x:02d}: ")
+                    harga = int(input(f"Masukkan Harga untuk '{nama_kopi}': "))
+                    harga_total_kopi = harga * total_kopi
+                    file.write(f"{x:02d}\t{nama_kopi}{' '*(72-len(nama_kopi))}{harga}")
+                    total_harga += harga_total_kopi
+
+                file.write("=" * 87 + "\n")
+                file.write(f"Item Count\t:{' ' * (63)}{total_kopi}\n")
+                file.write(f"Total Cost\t\t:{' ' * (63)}{harga_total_kopi}\n")
+                file.write("=" * 87 + "\n")
+
+            file.write("Customer ID # : COFF12345\n")
+            file.write(f"ID Pelanggan: {id_pelanggan}\n")
+            file.write(f"Nama Pelanggan : {nama_pelanggan}\n\n")
+            file.write(f"{' ' * ((width - len('Thank you')) // 2)}Thank you\n")
+            file.write(f"{' ' * ((width - len('for Visiting us')) // 2)}for Visiting us\n")
+
+        print("Daftar lagu berhasil disimpan di Coffee Shop.txt")
+
+    except ValueError:
+        print("Input tidak valid, masukkan angka yang benar.")
+
+
+if __name__ == "__name__":
+    main()
